@@ -1,0 +1,28 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/test
+    username: test
+    password: test
+    hikari:
+      pool-name: hikari-cp
+      maximum-pool-size: 2
+      max-lifetime: 55000
+      auto-commit: false
+      connection-test-query: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+#    hibernate:
+#      ddl-auto: create
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+        ddl-auto: none
