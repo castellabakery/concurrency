@@ -30,7 +30,7 @@ public class CheckLockAdvisor {
 
         try {
             log.info("Wait the Lock...");
-            if(!lock.tryLock(10, 1, TimeUnit.SECONDS)) {
+            if(!lock.tryLock(20, 1, TimeUnit.SECONDS)) {
 //                throw new Exception("Failed to get the Lock !");
                 return null;
             }
