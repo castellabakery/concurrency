@@ -30,7 +30,7 @@ public class CheckLockAdvisor {
 
         try {
             log.info("Wait the Lock...");
-            if(!lock.tryLock(1, 3, TimeUnit.SECONDS)) {
+            if(!lock.tryLock(10, 1, TimeUnit.SECONDS)) {
 //                throw new Exception("Failed to get the Lock !");
                 return null;
             }
@@ -39,11 +39,29 @@ public class CheckLockAdvisor {
         } catch(Exception e){
             e.printStackTrace();
         } finally {
-            if(lock != null&& lock.isLocked()){
+            if(lock != null && lock.isLocked()){
                 lock.unlock();
             }
             log.info("Process Complete.");
         }
+
+//        try {
+//            if(lock.tryLock(30, 30, TimeUnit.SECONDS)) {
+//                try {
+//                    log.info("You got the Lock !");
+//                    proceedReturnValue = proceedingJoinPoint.proceed();
+//                } catch(Exception e){
+//                    e.printStackTrace();
+//                } finally {
+//                    if(lock != null && lock.isLocked()){
+//                        lock.unlock();
+//                    }
+//                    log.info("Lock is Down.");
+//                }
+//            }
+//        } catch(InterruptedException e){
+//            Thread.currentThread().interrupt();
+//        }
 
         return proceedReturnValue;
     }
